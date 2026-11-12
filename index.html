@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal Luck Recife</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600&family=Manrope:wght@500;600;700&display=swap">
+<style>
+/* Layout: foto da equipe de fundo em tela cheia, título centralizado e painel escuro translúcido com os atalhos em grade */
+:root{
+  --ink:#ffffff; --ink-soft:rgba(255,255,255,.78);
+  --panel-a:rgba(24,22,44,.86); --panel-b:rgba(44,40,72,.78);
+  --tile-hover:rgba(255,255,255,.09); --line:rgba(255,255,255,.14);
+  --accent:#5fe0b0;
+  --display:"Unbounded","Manrope",system-ui,sans-serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --photo:url("fundo.jpg");
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{background:#1b2a24;color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.4}
+body::after{content:"";position:fixed;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.05) 35%,rgba(0,0,0,.35) 100%),var(--photo) center/cover no-repeat}
+.page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+  padding-block:48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(24px,5vw,44px);letter-spacing:.02em;text-transform:uppercase;
+  margin:0;text-align:center;text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.panel{width:100%;max-width:820px;border-radius:6px;padding:28px 24px;
+  background:linear-gradient(135deg,var(--panel-a),var(--panel-b));
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  box-shadow:0 24px 60px rgba(0,0,0,.4);
+  display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+a.tile{display:flex;flex-direction:column;align-items:center;gap:12px;padding:20px 8px 18px;border-radius:8px;
+  color:var(--ink);text-decoration:none;text-align:center;transition:background .18s,transform .18s}
+a.tile svg{width:46px;height:46px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:color .18s}
+a.tile strong{font-family:var(--display);font-weight:500;font-size:13.5px;letter-spacing:.01em}
+a.tile span{font-size:12px;color:var(--ink-soft);margin-top:-8px}
+a.tile:hover{background:var(--tile-hover);transform:translateY(-2px)}
+a.tile:hover svg{color:var(--accent)}
+a.tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.foot{font-size:12px;color:var(--ink-soft);text-shadow:0 1px 8px rgba(0,0,0,.6)}
+@media (max-width:760px){.panel{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:480px){.panel{grid-template-columns:repeat(2,1fr);padding:16px 12px}a.tile svg{width:40px;height:40px}}
+@media (prefers-reduced-motion:reduce){a.tile,a.tile svg{transition:none}}
+body{margin:0}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <h1>Links Luck Recife</h1>
+  <nav class="panel" id="panel" aria-label="Sistemas"></nav>
+  <p class="foot">Os links abrem em uma nova aba.</p>
+</div>
+
+<script>
+const I = {
+  recruit:'<circle cx="10" cy="9" r="4"/><path d="M3 21c0-3.9 3.1-7 7-7 1.4 0 2.7.4 3.8 1.1"/><circle cx="17.5" cy="17.5" r="3"/><path d="M19.7 19.7L22 22"/>',
+  people:'<circle cx="8" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.6"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M14.5 14.3c.8-.2 1.6-.3 2.5-.3 2.8 0 5 2.2 5 5"/>',
+  cap:'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/>',
+  tooth:'<path d="M12 5.5C10.5 4 8.6 3.5 7 3.5 4.5 3.5 3 5.5 3 8.2c0 2.7 1.3 4.3 2 6.3.8 2.4.9 6 2.8 6 1.8 0 1.7-4.5 4.2-4.5s2.4 4.5 4.2 4.5c1.9 0 2-3.6 2.8-6 .7-2 2-3.6 2-6.3 0-2.7-1.5-4.7-4-4.7-1.6 0-3.5.5-5 2z"/>',
+  dumbbell:'<path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"/><path d="M1.5 12h2M20.5 12h2"/>',
+  book:'<path d="M2 5.5C4.5 4 8 4 12 6c4-2 7.5-2 10-.5V19c-2.5-1.5-6-1.5-10 .5-4-2-7.5-2-10-.5z"/><path d="M12 6v13.5"/>',
+  flow:'<rect x="3" y="3" width="6" height="5" rx="1"/><rect x="15" y="3" width="6" height="5" rx="1"/><rect x="9" y="16" width="6" height="5" rx="1"/><path d="M6 8v3h12V8M12 11v5"/>',
+  calc:'<rect x="5" y="2.5" width="14" height="19" rx="2"/><rect x="8" y="5.5" width="8" height="4" rx=".5"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/>',
+  scale:'<path d="M12 3v18M7 21h10M4 7h16"/><path d="M4 7l-3 6c0 1.7 1.3 3 3 3s3-1.3 3-3zM20 7l-3 6c0 1.7 1.3 3 3 3s3-1.3 3-3z"/><circle cx="12" cy="4" r="1"/>',
+  bank:'<path d="M3 9.5L12 4l9 5.5"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20.5h18"/>'
+};
+const LINKS = [
+  {n:"Recrut AI", d:"Recrutamento", i:"recruit", u:"https://www.recrut.ai/"},
+  {n:"Gestio", d:"Gestão de pessoas", i:"people", u:"https://app.gestio.com.br/login"},
+  {n:"Zeev", d:"Fluxos", i:"flow", u:"https://luck.zeev.it/"},
+  {n:"Onvio", d:"Contabilidade", i:"calc", u:"https://onvio.com.br/login/#/"},
+  {n:"UniLuck", d:"Universidade", i:"book", u:"https://uniluck.vercel.app/"},
+  {n:"Jusbrasil", d:"Jurídico", i:"scale", u:"https://www.jusbrasil.com.br/"},
+  {n:"CIEE", d:"Estágios", i:"cap", u:"https://portal.cieepe.org.br/Atendimento/Account/LoginNew?_gl=1*j4iei*_ga*NzEyMTY2MjMzLjE3ODgxOTU0NTk.*_ga_NVLVD9K0C7*czE3OTQ0ODI1MDAkbzMkZzEkdDE3OTQ0ODI1MjAkajQwJGwwJGgw"},
+  {n:"Itaú", d:"Banco", i:"bank", u:"https://www.itau.com.br/"},
+  {n:"Clin", d:"Plano odontológico", i:"tooth", u:"https://empresa.planoclin.com.br/plataformaRh"},
+  {n:"Wellhub", d:"Bem-estar", i:"dumbbell", u:"https://clients.gympass.com/clients/f6f47c79-e80d-4585-8b0b-e79bea911b96"}
+];
+document.getElementById("panel").innerHTML = LINKS.map(l =>
+  `<a class="tile" href="${l.u}" target="_blank" rel="noopener">
+     <svg viewBox="0 0 24 24" aria-hidden="true">${I[l.i]}</svg>
+     <strong>${l.n}</strong><span>${l.d}</span>
+   </a>`).join("");
+</script>
+</body>
+</html>
